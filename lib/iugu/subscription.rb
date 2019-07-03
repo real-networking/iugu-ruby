@@ -72,6 +72,14 @@ module Iugu
                                                             options))
     end
 
+    def change_subitems(subitems, options = {})
+      options.merge!({ subitems: subitems })
+      Iugu::Factory.create_from_response(self.class.object_type,
+                                          APIRequest.request('PUT',
+                                                            "#{self.class.url(self.id)}/",
+                                                            options))
+    end
+
     def customer
       return false unless @attributes['customer_id']
       Customer.fetch @attributes['customer_id']
