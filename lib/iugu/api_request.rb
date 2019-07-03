@@ -16,8 +16,10 @@ module Iugu
     rescue RestClient::ResourceNotFound
       raise ObjectNotFound
     rescue RestClient::UnprocessableEntity => ex
+      puts JSON.parse(ex.response)
       raise RequestWithErrors.new JSON.parse(ex.response)['errors']
     rescue RestClient::BadRequest => ex
+      puts JSON.parse(ex.response)
       raise RequestWithErrors.new JSON.parse(ex.response)['errors']
     end
 
